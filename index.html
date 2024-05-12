@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijera</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .mainCont{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            /* margin-left: 35%; */
+        }
+        .formCont{
+            background-color: rgb(233, 174, 101);
+            width: 100%;
+            padding: 10px;
+            border-radius: 7px;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            width: auto;
+            padding: 10px;
+            border-radius: 7px;
+        }
+        
+        .resultado-container {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            border-radius: 7px;
+            width: auto;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .resultado-container h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            background-color: rgb(216, 241, 166);
+            padding: 10px;
+            border-radius: 7px;
+            width: auto;
+        }
+        .resultado-container h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            background-color: green;
+            padding: 10px;
+            border-radius: 7px;
+            width: auto;
+        }
+
+        .userElect  {
+            margin: 5px 0;
+            background-color: yellow;
+            padding: 10px;
+            border-radius: 7px;
+            width: auto;
+        }
+        .compuElect  {
+            margin: 5px 0;
+            background-color: rgb(0, 128, 255);
+            padding: 10px;
+            border-radius: 7px;
+            width: auto;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="mainCont">
+    <h1>Piedra, Papel o Tijera</h1>
+    <form id="formulario" class="formCont">
+        <label for="eleccion">Elige tu opción:</label>
+        <select name="eleccion" id="eleccion">
+            <option value="Piedra">Piedra</option>
+            <option value="Papel">Papel</option>
+            <option value="Tijera">Tijera</option>
+        </select>
+        <button type="button" onclick="jugar()">Jugar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function jugar() {
+            var opciones = ['Piedra', 'Papel', 'Tijera'];
+            var eleccionUsuario = document.getElementById('eleccion').value;
+            var eleccionComputadora = opciones[Math.floor(Math.random() * opciones.length)];
+
+            var resultado = determinarResultado(eleccionUsuario, eleccionComputadora);
+            mostrarResultado(eleccionUsuario, eleccionComputadora, resultado);
+        }
+
+        function determinarResultado(eleccionUsuario, eleccionComputadora) {
+            if (eleccionUsuario === eleccionComputadora) {
+                return 'Empate';
+            } else if ((eleccionUsuario === 'Piedra' && eleccionComputadora === 'Tijera') ||
+                       (eleccionUsuario === 'Papel' && eleccionComputadora === 'Piedra') ||
+                       (eleccionUsuario === 'Tijera' && eleccionComputadora === 'Papel')) {
+                return 'Ganaste';
+            } else {
+                return 'Perdiste';
+            }
+        }
+
+        function mostrarResultado(eleccionUsuario, eleccionComputadora, resultado) {
+            var resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                <div class="resultado-container">
+                    <h2>Resultado:</h2>
+                    <p class="userElect">Tu elección: ${eleccionUsuario}</p>
+                    
+                    <p class="compuElect">Elección de la computadora: ${eleccionComputadora}</p>
+                    <h1>${resultado}</h1>
+                </div>
+            `;
+        }
+
+    </script>
+    </div>
+</body>
+</html>
+
+
+
+
